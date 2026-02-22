@@ -1,0 +1,29 @@
+/* medium 500, semibold 600, bold 700 */
+
+@font-face {
+  font-family: "Palaquin";
+  src: url(../assets/fonts/Palanquin-Medium.ttf) format("truetype");
+  font-weight: medium;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Palaquin";
+  src: url(../assets/fonts/Palanquin-SemiBold.ttf) format("truetype");
+  font-weight: semibold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Palaquin";
+  src: url(../assets/fonts/Palanquin-Bold.ttf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PalaquinDark";
+  src: url(../assets/fonts/PalanquinDark-Bold.ttf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
