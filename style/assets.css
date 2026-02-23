@@ -1,4 +1,4 @@
-
+@import url('./parameters.css');
 
 
 
@@ -18,4 +18,24 @@
 /* modyfier -- */
 .btn--primary{
 
+}
+
+/* dialog */
+
+/* block */
+.dialog{
+width: 415px;
+height:269px;
+border-radius: 32px;
+padding: 32px 40px;
+}
+
+
+/* element __ */
+
+
+
+/* modyfier -- */
+.dialog--dark{
+background-color: var(--color-basket-primary);
 }

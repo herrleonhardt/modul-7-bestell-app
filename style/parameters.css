@@ -1,0 +1,19 @@
+:root {
+  --color-primary: #e76c1f;
+  --color-secondary: #fdeadc;
+  --color-background: #ffffff;
+  --color-basket-primary: #363534;
+  --color-basket-scrollbar: #e7c3ad;
+  --color-rating-background: #facaac;
+  --color-text: #333333;
+
+  --headder-height: 128px;
+  --footer-height: 128px;
+}
+
+@media screen and (max-width: 768px) {
+:root {
+      --headder-height: 79px;
+      --footer-height: 79px;
+  }
+}

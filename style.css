@@ -1,0 +1,36 @@
+@import url('./style/parameters.css');
+
+
+
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+
+.container {
+    max-width: 1440px;
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        width: 90%;
+    }
+}
+
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--headder-height);
+    background-color: var(--color-primary);
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}

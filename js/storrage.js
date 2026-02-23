@@ -14,7 +14,7 @@ function loadCardFromLocalStorage(){
 
 // genuine functions
 
-export function safeDataToLocalStorage(dataArray, storageKey) {
+function safeDataToLocalStorage(dataArray, storageKey) {
   try {
     const jsonData = JSON.stringify(dataArray);
     localStorage.setItem(storageKey, jsonData);
@@ -25,7 +25,7 @@ export function safeDataToLocalStorage(dataArray, storageKey) {
   } 
 }
 
-export function loadDataFromLocalStorage(storageKey) {
+function loadDataFromLocalStorage(storageKey) {
     try {
         const jsonData = localStorage.getItem(storageKey);
         if (jsonData) {
