@@ -1,4 +1,17 @@
 /* medium 500, semibold 600, bold 700 */
+@font-face {
+  font-family: "Palaquin";
+  src: url(../assets/fonts/Palanquin-Light.ttf) format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Palaquin";
+  src: url(../assets/fonts/Palanquin-Regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
   font-family: "Palaquin";
@@ -26,4 +39,31 @@
   src: url(../assets/fonts/PalanquinDark-Bold.ttf) format("truetype");
   font-weight: bold;
   font-style: normal;
+}
+
+
+/* fontsizes */
+
+:root {
+ --font-size-hero: 48px;
+ --font-size-hero-description: 24px;
+ --font-size-rating: 20px;
+ --font-size-categorie-title: 40px;
+ --font-size-card-title: 24px;
+ --font-size-card-description: 16px;
+ --font-size-prize: 24px;
+ --font-size-footer: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --font-size-hero: 40px;
+        --font-size-hero-description: 22px;
+        --font-size-rating: 20px;
+         --font-size-categorie-title: 32px;
+        --font-size-card-title: 24px;
+        --font-size-card-description: 16px;
+        --font-size-prize: 24px;
+        --font-size-footer: 18px;
+    }
 }

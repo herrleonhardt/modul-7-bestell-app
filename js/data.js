@@ -14,7 +14,7 @@ let stock = [
 ];
 
 let categories = [
-    {"ID": 1, "name": "Burger & Sandwiches", "img": "./assets/img/categories/burger.jpg"},
-    {"ID": 2, "name": "Pizza (30cm)", "img": "./assets/img/categories/pizza.jpg"},
-    {"ID": 3, "name": "Salad", "img": "./assets/img/categories/salad.jpg"}
+    {"ID": 1, "name": "Burger & Sandwiches", "img": "./assets/img/categories/burger.png"},
+    {"ID": 2, "name": "Pizza (30cm)", "img": "./assets/img/categories/pizza.png"},
+    {"ID": 3, "name": "Salad", "img": "./assets/img/categories/salad.png"}
 ];
