@@ -1,18 +1,3 @@
-function init() {
-  renderProducts();
-}
-
-function renderProducts() {
-  const productsContainer = document.getElementById("products");
-
-  for (let i = 0; i < categories.length; i++) {
-    const categorieContainer = renderCategorie(categories[i]);
-    productsContainer.appendChild(categorieContainer);
-  }
-}
-
-
-
 
 function toggleBasket() {
   const basket = document.querySelector(".basket");
@@ -29,4 +14,11 @@ function toggleBasket() {
   }, 10); // Warte 10ms, bevor die Klasse "basket--active" hinzugefügt wird
     
   }
+}
+
+function toggleDNone(elementId){
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.toggle("d_none");
+    }
 }

@@ -10,6 +10,15 @@ function loadCardFromLocalStorage(){
 }
 
 
+function safeUsedVouchersToLocalStorage(vouchers){
+    safeDataToLocalStorage(vouchers, "bestellappvouchers")
+}
+
+
+function loadVouchersFromLocalStorage(){
+    let vouchers = loadDataFromLocalStorage("bestellappvouchers");
+    return vouchers;
+}
 
 
 // genuine functions
