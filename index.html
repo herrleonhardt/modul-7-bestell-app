@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bestell-App</title>
-    <link rel="stylesheet" href="./style/basket.css" />
-    <link rel="stylesheet" href="./style/product-card.css" />
-    <link rel="stylesheet" href="./style/assets.css" />
-    <link rel="stylesheet" href="./style.css" />
-
+    <link rel="stylesheet" href="./style/style.css" />
     <link
       rel="shortcut icon"
       href="./assets/icons/favicon.png"
@@ -57,13 +53,13 @@
           </p>
         </div>
       </section>
-      <div class="maincontent">
+      <div class="maincontentwrapper container">
         <section id="products" class="products">
           <!-- Dynamically filled with JavaScript -->
         </section>
-        <div class="absolute container">
+        <div class="basket-wrapper">
           <aside class="basket">
-            <h2 class="basket__title">Warenkorb</h2>
+            <h2 class="basket__title">Your Basket</h2>
             <div id="basket__placeholder" class="basket__placeholder">
               <p>
                 Nothing here yet.<br />
@@ -75,14 +71,14 @@
                 />
               </svg>
             </div>
-            <div id="basket__products" class="basket__products">
+            <div id="basket__products" class="basket__products d_none">
               <!-- Dynamically filled with JavaScript -->
             </div>
-            <div id="basket__calculation" class="basket__calculation">
+            <div id="basket__calculation" class="basket__calculation d_none">
               <!-- Dynamically filled with JavaScript -->
             </div>
-            <button id="order-btn" class="btn btn--large" disabled>
-              Bestellung abschicken
+            <button id="order-btn" class="btn btn--large btn--basket d_none" disabled>
+              Buy now (<span id="btn-total"></span>)
             </button>
           </aside>
         </div>
@@ -160,8 +156,11 @@
   <!-- logic -->
   <script src="./js/store/basket.js"></script>
   <!-- ui -->
+  <script src="./js/ui/renderUtils.js"></script>
   <script src="./js/ui/visibility.js"></script>
   <script src="./js/ui/templates.js"></script>
+  <!-- events -->
+  <script src="./js/events/bindEvents.js"></script>
   <!-- wireing up  -->
   <script src="./main.js"></script>
 </html>

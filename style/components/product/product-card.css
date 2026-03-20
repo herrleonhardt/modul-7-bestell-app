@@ -1,0 +1,61 @@
+
+
+/* Dish Card */
+
+/* block */
+
+.product-card{
+    display: flex;
+    min-height: 141px;
+    max-width: 713px;
+    width: 100%;
+    background-color: var(--color-secondary);
+    border-radius: 12px;
+    padding: 10px 10px 20px 10px;
+    gap: 15px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .product-card{
+  
+    width: 100%;
+        flex-grow: 1;
+    flex-direction: column;
+  
+}
+}
+
+/* element __ */
+.product-card__image{
+    height: 120px;
+    min-height: 120px;
+    object-fit: cover;
+    width: 205px;
+    min-width: 205px;
+    border-radius: 12px;
+
+}
+
+.product-card__footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-left: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .product-card__footer{
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: unset;
+    }
+}
+
+.product-card__price{
+    font-size: var(--font-size-prize);
+    font-weight: bold;
+    color: var(--color-text);
+}

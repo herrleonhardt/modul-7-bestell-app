@@ -1,83 +1,91 @@
-function getDeliveryFee(){
-
-    return settings.deliveryFee;
+function getDeliveryFee() {
+  return settings.deliveryFee;
 }
 
-function getMinBasketValue(){
-    return settings.minBasketValue;
+function getMinBasketValue() {
+  return settings.minBasketValue;
 }
 
-function getMinBasketValueForFreeDelivery(){
-    return settings.minBasketForFreeDelivery;
+function getMinBasketValueForFreeDelivery() {
+  return settings.minBasketForFreeDelivery;
 }
 
-function getCurrentBasketValue(){
-    let basketValue = 0;
-    for (let basketIndex = 0; basketIndex < basket.length; basketIndex++) {
-        const element = basket[basketIndex];
-        basketValue += element['ammount'] * element['pricePerUnit'];
-    }
-    return basketValue.toFixed(2);
+function calculateBasketSubtotalValue() {
+  let basketValue = 0;
+  for (let basketIndex = 0; basketIndex < basket.length; basketIndex++) {
+    const element = basket[basketIndex];
+    basketValue += element["ammount"] * element["pricePerUnit"];
+  }
+  return basketValue;
 }
 
-function getBasketTotal(){
-    let basketTotalValue = 0;
+function calculateBasketTotal() {
+  let basketTotalValue = 0;
 
-    basketTotalValue += getCurrentBasketValue();
-    if(!isDeliveryFree){
-        basketTotalValue += getDeliveryFee();
-    }
-    if(isVoucherValid("WELCOME20")){
-        basketTotalValue -= calculateVoucherValue("WELCOME20");
-    }
+  basketTotalValue = basketTotalValue + calculateBasketSubtotalValue();
+  basketTotalValue = basketTotalValue + calculateDeliveryFee();
 
-    return basketTotalValue;
+  if (isVoucherValid(settings.activeVoucher)) {
+    basketTotalValue = basketTotalValue - calculateVoucherValue(settings.activeVoucher);
+  }
+
+  return basketTotalValue;
 }
 
-function isMinBasketValue(){
-    return (getCurrentBasketValue - getMinBasketValue) >= 0;
+function calculateDeliveryFee() {
+  let returnvalue = 0;
+  if (!isDeliveryFree()) {
+    returnvalue = getDeliveryFee();
+  }
+  return returnvalue;
 }
 
-function isDeliveryFree(){
-    return (getCurrentBasketValue - getMinBasketValueForFreeDelivery) >= 0;
+function isMinBasketValue() {
+  return getCurrentBasketValue - getMinBasketValue() >= 0;
+}
+
+function isDeliveryFree() {
+  return calculateBasketSubtotalValue() - getMinBasketValueForFreeDelivery() >= 0;
 }
 
 function isVoucherValid(voucherCode) {
-    const voucher = getVoucher(voucherCode);
-if(voucher){
+  const voucher = getVoucher(voucherCode);
+  if (voucher) {
     return true;
+  } else {
+    return false;
+  }
 }
-    else{
-        return false;
+
+function getVoucher(voucherCode) {
+  return validVouchers.find((e) => e.code === voucherCode);
+}
+
+function setVoucherAsUsed(voucherCode) {
+  const usedVouchers = loadVouchersFromLocalStorage;
+
+  if (!usedVouchers.includes(voucherCode)) {
+    usedVouchers.push(voucherCode);
+  }
+
+  safeUsedVouchersToLocalStorage(usedVouchers);
+}
+
+function calculateVoucherValue(voucherCode) {
+  const voucher = getVoucher(voucherCode);
+  let returnvalue = 0;
+
+  if (voucher) {
+    if (voucher["discountUnit"] == "%") {
+      returnvalue = (calculateBasketSubtotalValue() * voucher["discountValue"]) / 100;
+    } else if (voucher["discountUnit"] == "€") {
+      returnvalue = voucher["discountValue"];
     }
+  }
+
+  return returnvalue;
 }
 
-function getVoucher(voucherCode){
-    return validVouchers.find(e => e.code === voucherCode);
-}
-
-function setVoucherAsUsed(voucherCode){
-    const usedVouchers = loadVouchersFromLocalStorage;
-
-    if(!usedVouchers.includes(voucherCode)){
-        usedVouchers.push(voucherCode)
-    }
-
-    safeUsedVouchersToLocalStorage(usedVouchers);
-}
-
-function calculateVoucherValue(voucherCode){
-    const voucher = getVoucher(voucherCode);
-    let returnvalue = 0;
-    if(voucher['discountUnit']=='%'){
-        returnvalue = getCurrentBasketValue() * voucher['discountValue'] / 100;
-    }
-    else if(voucher['discountUnit']=='€'){
-        returnvalue = voucher['discountValue']
-    }
-    return returnvalue;
-}
-
-function isBasketEmpty(){
-    return basket.length == 0;
+function isBasketEmpty() {
+  return basket.length == 0;
 }

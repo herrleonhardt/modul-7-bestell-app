@@ -22,3 +22,17 @@ function toggleDNone(elementId){
         element.classList.toggle("d_none");
     }
 }
+
+function addDNone(elementId){
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.add("d_none");
+    }
+}
+
+function removeDNone(elementId){
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.remove("d_none");
+    }
+}

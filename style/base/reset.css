@@ -1,0 +1,56 @@
+/* 1. Box-Sizing vereinheitlichen */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Standard-Margins entfernen */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* 3. Listen zurücksetzen */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 4. Body Grundeinstellungen */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+/* 5. Bilder & Medien */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* 6. Formularelemente */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Links ohne Default-Styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}

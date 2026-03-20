@@ -1,0 +1,44 @@
+:root {
+  /* COLORS */
+  --color-primary: #e76c1f;
+  --color-secondary: #fdeadc;
+
+  --color-background: #ffffff;
+
+  --color-dark: #363534;
+
+  --color-accent-soft: #e7c3ad;
+
+  --color-highlight-soft: #facaac;
+  
+  --color-text:#333333;
+  --color-text-light: #ffffff;
+
+  /* TYPOGRAPHY */
+  /* ... */
+
+  /* SPACING */
+  /* ... */
+
+  /* LAYOUT */
+  --headder-height: 128px;
+  --footer-height: 128px;
+  --menubar-height: 78px;
+
+  /* EFFECTS */
+  /* ... */
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    /* COLORS */
+
+    /* TYPOGRAPHY */
+
+    /* SPACING */
+
+    /* LAYOUT */
+    --headder-height: 79px;
+    /* EFFECTS */
+  }
+}

@@ -1,0 +1,36 @@
+
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--headder-height);
+    background-color: var(--color-primary);
+}
+
+
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+@media screen and (max-width: 768px) {
+    .header__container {
+        padding:16px;
+    }
+
+}
+
+
+.header__nav {
+}
+
+
+@media screen and (max-width: 768px) {
+.header__nav {
+      display: none;
+  }
+}

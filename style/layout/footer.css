@@ -1,0 +1,30 @@
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--footer-height);
+    background-color: var(--color-primary);
+    font-size: var(--font-size-footer);
+}
+
+.footer__copyright svg {
+    fill: var(--color-text-light);
+    width: 20px;
+    height: 20px;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 72px;
+    color: var(--color-text-light);
+}
+
+@media screen and (max-width: 768px) {
+.footer-nav {
+      flex-direction: column;
+      gap: unset;
+  }
+}

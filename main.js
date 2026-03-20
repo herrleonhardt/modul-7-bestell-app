@@ -3,6 +3,7 @@ function init() {
   
   renderProducts();
   renderBasketContent();
+ bindEvents();
 }
 
 

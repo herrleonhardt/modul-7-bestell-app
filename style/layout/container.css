@@ -1,0 +1,28 @@
+@media screen and (max-width: 768px) {
+  body {
+    margin: 0 0 var(--menubar-height) 0;
+  }
+}
+
+.container {
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.subcontainer {
+  padding-right: 40px;
+  padding-left: 120px;
+}
+
+@media screen and (max-width: 768px) {
+  .subcontainer {
+    padding: 16px;
+  }
+}
