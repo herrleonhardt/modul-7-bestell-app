@@ -5,7 +5,7 @@
  * @param {*} classNames 
  * @returns 
  */
-function createHtmlElementWithClass(elementType, classNames = "") {
+export function createHtmlElementWithClass(elementType, classNames = "") {
   const element = document.createElement(elementType);
   if (classNames != "") {
     const classes = classNames.split(" ");
@@ -22,7 +22,7 @@ function createHtmlElementWithClass(elementType, classNames = "") {
  * @param {*} innerHtml 
  * @returns 
  */
-function createSvg(viewBox, innerHtml){
+export function createSvg(viewBox, innerHtml){
  let xmlns = "http://www.w3.org/2000/svg";
     var svgElem = document.createElementNS(xmlns, "svg");
     svgElem.setAttributeNS(null, "viewBox", viewBox);
