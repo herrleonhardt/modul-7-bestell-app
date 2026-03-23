@@ -1,7 +1,9 @@
 
 // product card rendering
 
-function renderCard(product) {
+import { createHtmlElementWithClass } from "../../shared/renderUtils.js";
+
+export function getProductHtmlTemplate(product) {
   //   console.log(`${product.ID}: ${product.name}`);
   const cardContainer = createHtmlElementWithClass("article", "product-card");
   cardContainer.dataset.id = product.id;

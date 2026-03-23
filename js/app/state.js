@@ -2,14 +2,14 @@ const uiState = {
   // isBasketEmpty: true,
 };
 
-const settings = {
+export const settings = {
   deliveryFee: 4.99,
   minBasketValue: 20.0,
   minBasketForFreeDelivery: 30.0,
   activeVoucher : "",
 };
 
-const basket = [
+export const basket = [
   // { productId: 1, ammount: 1, pricePerUnit: 16.9 },
   // { productId: 2, ammount: 1, pricePerUnit: 16.9 },
   // { productId: 3, ammount: 1, pricePerUnit: 16.9 },

@@ -1,3 +1,13 @@
+import { calculateBasketSubtotalValue, isBasketEmpty, calculateDeliveryFee, getActiveVoucher, calculateBasketTotal, calculateVoucherValue } from "./basket.js";
+import { addDNone, removeDNone } from "./../../shared/visibility.js"
+import { createHtmlElementWithClass } from "./../../shared/renderUtils.js"
+import { getCalculationTableRow, getVoucherTableRow, getBasketElementHtmlTemplate} from "./basket.ui.template.js";
+import { basket } from "../../app/state.js";
+
+
+
+
+
 function toggleBasket() {
   const basket = document.querySelector(".basket");
   
@@ -17,10 +27,10 @@ function toggleBasket() {
 
 
 // basket rendering
-function renderBasketContent() {
+export function renderBasketContent() {
   // const basketPlaceholderContainer = document.getElementById("basket__placeholder");
   if (!isBasketEmpty()) {
-    
+
 updateBasketProducts();
 renderBasketCalculation();
   }
@@ -77,13 +87,15 @@ function updateBasketDeliveryFee() {
   }
 }
 
-function updateVoucherValue() {
+export function updateVoucherValue() {
   const voucherValue = document.getElementById("voucher-value");
   if (voucherValue) {
-    voucherCode = settings.activeVoucher;
+    let voucherCode = getActiveVoucher();
+    if(voucherCode != ""){
     voucherValue.textContent = `-${calculateVoucherValue(voucherCode).toFixed(
       2
     )}€`;
+    }
   }
   updateBasketTotal();
 }
@@ -94,6 +106,7 @@ function updateBasketTotal() {
   if (totalValue) {
     totalValue.textContent = `${calculateBasketTotal().toFixed(2)}€`;
   }
+
   if (btnTotalValue) {
     btnTotalValue.textContent = `${calculateBasketTotal().toFixed(2)}€`;
   }
@@ -117,7 +130,7 @@ function updateAfterSubtotal() {
   updateBasketTotal();
 }
 
-function updateBasketContent(){
+export function updateBasketContent(){
   updateBasketTemplate();
   updateBasketCalculation();
   updateBasketProducts();
@@ -150,7 +163,8 @@ function updateBasketProducts(){
       basketContainer.innerHTML = "";
       for (let bIndex = 0; bIndex < basket.length; bIndex++) {
         const element = basket[bIndex];
-        const basketElement = getHtmlBasketElement(element);
+      
+        const basketElement = getBasketElementHtmlTemplate(element);
         basketContainer.appendChild(basketElement);
       }
     }

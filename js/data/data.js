@@ -1,4 +1,4 @@
-let stock = [    
+export const stock = [    
     {"id": 1, "name": "Veggie mushroom black burger", "categorieId": 1, "description": "Mixed green salad, Tomatoes, Edamame, Mushrooms", "price": 16.90, "img": "./assets/img/dishes/Veggie-mushroom-black-burger.jpg"},
     {"id": 2, "name": "All meat burger", "categorieId": 1, "description": "Beef, Bacon, Dill pickles, Smoked cheese, Ketchup, BBQ souse", "price": 15.90, "img": "./assets/img/dishes/All-meat-burger.jpg"},
     {"id": 3, "name": "Beef red burger", "categorieId": 1, "description": "Beef, Cheese, Tomatoes, Lettuce, Onion", "price": 14.90, "img": "./assets/img/dishes/Beef-red-burger.jpg"},
@@ -13,7 +13,7 @@ let stock = [
     {"id": 12, "name": "Vegan green salad with tofu", "categorieId": 3, "description": "Green salad, Cherry tomatoes, Cucumber, Baby spinach, Edamame, Radishes, Bittercress, Tofu, Peanuts", "price": 14.90,"img":"./assets/img/dishes/Vegan-green-salad-with-tofu.jpg"}
 ];
 
-let categories = [
+export const categories = [
     {"id": 1, "name": "Burger & Sandwiches", "img": "./assets/img/categories/burger.png"},
     {"id": 2, "name": "Pizza (30cm)", "img": "./assets/img/categories/pizza.png"},
     {"id": 3, "name": "Salad", "img": "./assets/img/categories/salad.png"}
@@ -21,7 +21,7 @@ let categories = [
 
 
 
-let validVouchers = [
+export const validVouchers = [
   { "id" : 1, "code": "SAVE10", "discountUnit": "%", "discountValue": 10 },
   { "id" : 2, "code": "WELCOME20", "discountUnit": "%", "discountValue": 20 },
   { "id" : 3, "code": "FREESHIP", "discountUnit": "%", "discountValue": 100 },

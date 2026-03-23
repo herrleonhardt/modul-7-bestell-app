@@ -1,5 +1,7 @@
+import { createHtmlElementWithClass, createSvg } from "../../shared/renderUtils.js";
+import { getProduct } from "../product/product.js";
 
-function getCalculationTableRow(title, dataId) {
+export function getCalculationTableRow(title, dataId) {
   const tableRow = createHtmlElementWithClass("tr", "basket-calculation__row");
   const tabeleHead = createHtmlElementWithClass("th");
   tabeleHead.textContent = title;
@@ -10,7 +12,7 @@ function getCalculationTableRow(title, dataId) {
   return tableRow;
 }
 
-function getVoucherTableRow() {
+export function getVoucherTableRow() {
   const tableRow = createHtmlElementWithClass("tr", "basket-calculation__row");
   const tabeleHead = createHtmlElementWithClass("th");
   const voucherInput = createHtmlElementWithClass("input", "basket__input");
@@ -25,12 +27,13 @@ function getVoucherTableRow() {
   return tableRow;
 }
 
-function getHtmlBasketElement(basketEntry) {
+export function getBasketElementHtmlTemplate(basketEntry) {
   const product = getProduct(basketEntry.productId);
   const basketEntryContainer = createHtmlElementWithClass(
     "article",
     "basket-entry"
   );
+  
   basketEntryContainer.dataset.id = product.id;
   basketEntryContainer.dataset.state = "1";
   const basketEntryTitle = createHtmlElementWithClass(

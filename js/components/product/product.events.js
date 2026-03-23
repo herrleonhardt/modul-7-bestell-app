@@ -1,3 +1,5 @@
+import { updateBasketContent } from "../basket/basket.ui.js";
+import { addProductToBasket } from "./product.js";
 
 
 

@@ -1,3 +1,8 @@
+
+import { basket, settings } from "../../app/state.js"
+import { validVouchers } from "../../data/data.js";
+
+
 function getDeliveryFee() {
   return settings.deliveryFee;
 }
@@ -6,11 +11,11 @@ function getMinBasketValue() {
   return settings.minBasketValue;
 }
 
-function getMinBasketValueForFreeDelivery() {
+export function getMinBasketValueForFreeDelivery() {
   return settings.minBasketForFreeDelivery;
 }
 
-function calculateBasketSubtotalValue() {
+export function calculateBasketSubtotalValue() {
   let basketValue = 0;
   for (let basketIndex = 0; basketIndex < basket.length; basketIndex++) {
     const element = basket[basketIndex];
@@ -19,7 +24,7 @@ function calculateBasketSubtotalValue() {
   return basketValue;
 }
 
-function calculateBasketTotal() {
+export function calculateBasketTotal() {
   let basketTotalValue = 0;
 
   basketTotalValue = basketTotalValue + calculateBasketSubtotalValue();
@@ -32,7 +37,7 @@ function calculateBasketTotal() {
   return basketTotalValue;
 }
 
-function calculateDeliveryFee() {
+export function calculateDeliveryFee() {
   let returnvalue = 0;
   if (!isDeliveryFree()) {
     returnvalue = getDeliveryFee();
@@ -48,7 +53,7 @@ function isDeliveryFree() {
   return calculateBasketSubtotalValue() - getMinBasketValueForFreeDelivery() >= 0;
 }
 
-function isVoucherValid(voucherCode) {
+export function isVoucherValid(voucherCode) {
   const voucher = getVoucher(voucherCode);
   if (voucher) {
     return true;
@@ -61,6 +66,17 @@ function getVoucher(voucherCode) {
   return validVouchers.find((e) => e.code === voucherCode);
 }
 
+export function getActiveVoucher(){
+  let returnValue = "";
+  returnValue = settings.activeVoucher;
+  return returnValue;
+
+}
+
+export function setActiveVoucher(voucherCode){
+  settings.activeVoucher = voucherCode;
+}
+
 function setVoucherAsUsed(voucherCode) {
   const usedVouchers = loadVouchersFromLocalStorage;
 
@@ -71,7 +87,7 @@ function setVoucherAsUsed(voucherCode) {
   safeUsedVouchersToLocalStorage(usedVouchers);
 }
 
-function calculateVoucherValue(voucherCode) {
+export function calculateVoucherValue(voucherCode) {
   const voucher = getVoucher(voucherCode);
   let returnvalue = 0;
 
@@ -86,6 +102,6 @@ function calculateVoucherValue(voucherCode) {
   return returnvalue;
 }
 
-function isBasketEmpty() {
+export function isBasketEmpty() {
   return basket.length == 0;
 }

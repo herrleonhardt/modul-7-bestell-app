@@ -1,5 +1,10 @@
+import { stock } from "../../data/data.js";
+import { createHtmlElementWithClass } from "../../shared/renderUtils.js";
+import { getProductHtmlTemplate } from "../product/product.ui.template.js";
+
 // categorie rendering
-function renderCategorie(categorie) {
+export function getCategorieHtmlElement(categorie) {
+
   //  console.log(`${categorie.ID}: ${categorie.name}`);
   const categorieContainer = createHtmlElementWithClass("section", "categorie");
   const categorieContent = createHtmlElementWithClass(
@@ -34,7 +39,7 @@ function renderCategorie(categorie) {
       (product) => product.categorieId === categorie.id
     );
     for (let i = 0; i < categorieProducts.length; i++) {
-      const cardContainer = renderCard(categorieProducts[i]);
+      const cardContainer = getProductHtmlTemplate(categorieProducts[i]);
       categorieProductsContainer.appendChild(cardContainer);
     }
 

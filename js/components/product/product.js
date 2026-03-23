@@ -1,4 +1,8 @@
-function addProductToBasket(productId) {
+import { basket } from "../../app/state.js";
+import { stock } from "../../data/data.js";
+
+
+export function addProductToBasket(productId) {
   const product = getProduct(productId);
   if (product) {
     if (basket.includes((e) => e.productId == productId)) {
@@ -14,13 +18,13 @@ function addProductToBasket(productId) {
   }
 }
 
-function removeProductFromBasket() {}
+export function removeProductFromBasket() {}
 
-function increaseProductAmmountInBasket() {}
+export function increaseProductAmmountInBasket() {}
 
-function decreaseProductAmmountInBasket() {}
+export function decreaseProductAmmountInBasket() {}
 
-function getProduct(productId) {
+export function getProduct(productId) {
   let product = undefined;
   product = stock.find((e) => e.id == productId);
   return product;
