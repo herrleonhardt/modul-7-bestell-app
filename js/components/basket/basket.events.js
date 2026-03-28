@@ -1,8 +1,13 @@
 import { isVoucherValid, setActiveVoucher } from "./basket.js";
 import { updateVoucherValue } from "./basket.ui.js";
+import { toggleBasket } from "./basket.ui.js"
 
 export function initBasketEvents(){
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', (e) => {
+const basketToggleButton = e.target.closest("div[data-action='toggle-basket']")
+if(basketToggleButton){
+    toggleBasket();
+}
 
     })
 

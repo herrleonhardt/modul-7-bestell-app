@@ -1,5 +1,6 @@
 import { updateBasketContent } from "../basket/basket.ui.js";
 import { addProductToBasket } from "./product.js";
+import { updateProductCardFooter } from "./product.ui.js";
 
 
 
@@ -14,6 +15,7 @@ if(addToCardButton){
   const card = addToCardButton.closest('Article');
   addProductToBasket(card.dataset.id); 
   updateBasketContent();
+  updateProductCardFooter(card);
 }
 
   });

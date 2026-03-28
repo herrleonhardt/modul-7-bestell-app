@@ -2,12 +2,13 @@
 // product card rendering
 
 import { createHtmlElementWithClass } from "../../shared/renderUtils.js";
+import { getProductBasketAmmount } from "./product.js";
 
 export function getProductHtmlTemplate(product) {
   //   console.log(`${product.ID}: ${product.name}`);
   const cardContainer = createHtmlElementWithClass("article", "product-card");
   cardContainer.dataset.id = product.id;
-  cardContainer.dataset.state = "1";
+  cardContainer.dataset.state = "0";
   const cardImage = createHtmlElementWithClass("img", "product-card__image");
   cardImage.src = product.img;
   cardImage.alt = product.name;
@@ -19,6 +20,18 @@ export function getProductHtmlTemplate(product) {
     "product-card__description"
   );
   cardDescription.textContent = product.description;
+  cardContent.appendChild(cardName);
+  cardContent.appendChild(cardDescription);
+  
+const cardFooter = getProductCardFooterHtmlTemplate(product, getProductBasketAmmount(product.id));
+  cardContainer.appendChild(cardImage);
+  cardContainer.appendChild(cardContent);
+  cardContainer.appendChild(cardFooter);
+
+  return cardContainer;
+}
+
+export function getProductCardFooterHtmlTemplate(product, basketAmmount){
   const cardFooter = createHtmlElementWithClass("div", "product-card__footer");
   const cardPrice = createHtmlElementWithClass("span", "product-card__price");
   cardPrice.textContent = `${product.price.toFixed(2)}€`;
@@ -26,17 +39,18 @@ export function getProductHtmlTemplate(product) {
     "button",
     "btn btn--primary"
   );
-  addToCartButton.textContent = "Add to Cart";
+  if(basketAmmount == 0){
+    addToCartButton.textContent = "Add to Cart";
+  }
+  else{
+    addToCartButton.textContent = `Added ${basketAmmount}`
+    addToCartButton.classList.add("btn--accent");
+  }
+  
   addToCartButton.dataset.action = "add-to-card";
-
-  cardContent.appendChild(cardName);
-  cardContent.appendChild(cardDescription);
   cardFooter.appendChild(cardPrice);
   cardFooter.appendChild(addToCartButton);
 
-  cardContainer.appendChild(cardImage);
-  cardContainer.appendChild(cardContent);
-  cardContainer.appendChild(cardFooter);
+  return cardFooter;
 
-  return cardContainer;
 }

@@ -1,4 +1,4 @@
-import { calculateBasketSubtotalValue, isBasketEmpty, calculateDeliveryFee, getActiveVoucher, calculateBasketTotal, calculateVoucherValue } from "./basket.js";
+import { calculateBasketSubtotalValue, isBasketEmpty, calculateDeliveryFee, getActiveVoucher, calculateBasketTotal, calculateVoucherValue, calculateTotalBasketItems } from "./basket.js";
 import { addDNone, removeDNone } from "./../../shared/visibility.js"
 import { createHtmlElementWithClass } from "./../../shared/renderUtils.js"
 import { getCalculationTableRow, getVoucherTableRow, getBasketElementHtmlTemplate} from "./basket.ui.template.js";
@@ -8,7 +8,7 @@ import { basket } from "../../app/state.js";
 
 
 
-function toggleBasket() {
+export function toggleBasket() {
   const basket = document.querySelector(".basket");
   
   if (basket.classList.contains("basket--active")) {
@@ -144,12 +144,14 @@ function updateBasketTemplate(){
     addDNone("basket__products");
     addDNone("basket__calculation");
     addDNone("order-btn");
+    addDNone("menubar-basket-batch");
   }
   else{
     addDNone("basket__placeholder");
     removeDNone("basket__products");
     removeDNone("basket__calculation");
     removeDNone("order-btn");
+    removeDNone("menubar-basket-batch");
   }
 }
 
@@ -176,7 +178,7 @@ function updateBasketProducts(){
 
 function updateBasketIconBatch(){
 const basketBatch = document.getElementById("menubar-basket-batch");
-    basketBatch.textContent = basket.length;
+    basketBatch.textContent = calculateTotalBasketItems();
 }
 
 

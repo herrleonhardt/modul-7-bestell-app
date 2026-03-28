@@ -26,6 +26,11 @@
   background-color: white;
 }
 
+.btn--accent {
+  background-color: var(--color-primary);
+  color: white
+}
+
 .btn--large {
   width: unset;
   min-width: 230px;

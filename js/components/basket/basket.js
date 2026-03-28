@@ -105,3 +105,11 @@ export function calculateVoucherValue(voucherCode) {
 export function isBasketEmpty() {
   return basket.length == 0;
 }
+
+export function calculateTotalBasketItems(){
+  let returnValue = 0;
+basket.forEach((e) => {
+  returnValue += e.ammount;
+})
+return returnValue;
+}
