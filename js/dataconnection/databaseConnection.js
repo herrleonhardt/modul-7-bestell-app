@@ -1,0 +1,15 @@
+import { stock, validVouchers } from "../data/db.js";
+
+export function getProduct(productId) {
+  let product = undefined;
+  product = stock.find((e) => e.id == productId);
+  return product;
+}
+
+export function getVoucher(voucherCode) {
+  return validVouchers.find((e) => e.code === voucherCode);
+}
+
+export function isProductInStock(productId){
+    return stock.some(e => e.id == productId);
+}

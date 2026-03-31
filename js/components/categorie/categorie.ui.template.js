@@ -1,4 +1,4 @@
-import { stock } from "../../data/data.js";
+import { stock } from "../../data/db.js";
 import { createHtmlElementWithClass } from "../../shared/renderUtils.js";
 import { getProductHtmlTemplate } from "../product/product.ui.template.js";
 

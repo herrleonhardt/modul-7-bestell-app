@@ -2,7 +2,8 @@
 // product card rendering
 
 import { createHtmlElementWithClass } from "../../shared/renderUtils.js";
-import { getProductBasketAmmount } from "./product.js";
+import { getBasketProductAmmountById } from "../basket/basket.js";
+
 
 export function getProductHtmlTemplate(product) {
   //   console.log(`${product.ID}: ${product.name}`);
@@ -23,7 +24,7 @@ export function getProductHtmlTemplate(product) {
   cardContent.appendChild(cardName);
   cardContent.appendChild(cardDescription);
   
-const cardFooter = getProductCardFooterHtmlTemplate(product, getProductBasketAmmount(product.id));
+const cardFooter = getProductCardFooterHtmlTemplate(product, getBasketProductAmmountById(product.id));
   cardContainer.appendChild(cardImage);
   cardContainer.appendChild(cardContent);
   cardContainer.appendChild(cardFooter);

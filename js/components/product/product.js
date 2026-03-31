@@ -1,34 +1,22 @@
 import { basket } from "../../app/state.js";
-import { stock } from "../../data/data.js";
+import { stock } from "../../data/db.js";
+import { getProduct } from "../../dataconnection/databaseConnection.js";
+import { requestAddProductToBasketById, requestRemoveProductFromBasketById } from "../basket/basket.js";
 
 
 export function addProductToBasket(productId) {
-  const product = getProduct(productId);
-  if (product) {
-    if (basket.some((e) => e.productId == product.id)) {
-      const entryIndex = basket.findIndex((e) => e.productId == product.id);
-      basket[entryIndex].ammount++;
-    } else {
-      basket.push({
-        productId: product.id,
-        ammount: 1,
-        pricePerUnit: product.price,
-      });
-    }
-  }
+  requestAddProductToBasketById(productId);
 }
 
-export function removeProductFromBasket() {}
+export function removeProductFromBasket(productId) {
+ requestRemoveProductFromBasketById(productId);
+}
 
 export function increaseProductAmmountInBasket() {}
 
 export function decreaseProductAmmountInBasket() {}
 
-export function getProduct(productId) {
-  let product = undefined;
-  product = stock.find((e) => e.id == productId);
-  return product;
-}
+
 
 export function isProductInBasket(productId){
   return basket.some((e) => {e.productId == productId});

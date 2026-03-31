@@ -1,7 +1,9 @@
-
-import { basket, settings } from "../../app/state.js"
-import { validVouchers } from "../../data/data.js";
-
+import { basket, settings } from "../../app/state.js";
+import {
+  getProduct,
+  getVoucher,
+  isProductInStock,
+} from "../../dataconnection/databaseConnection.js";
 
 function getDeliveryFee() {
   return settings.deliveryFee;
@@ -31,7 +33,8 @@ export function calculateBasketTotal() {
   basketTotalValue = basketTotalValue + calculateDeliveryFee();
 
   if (isVoucherValid(settings.activeVoucher)) {
-    basketTotalValue = basketTotalValue - calculateVoucherValue(settings.activeVoucher);
+    basketTotalValue =
+      basketTotalValue - calculateVoucherValue(settings.activeVoucher);
   }
 
   return basketTotalValue;
@@ -50,7 +53,9 @@ function isMinBasketValue() {
 }
 
 function isDeliveryFree() {
-  return calculateBasketSubtotalValue() - getMinBasketValueForFreeDelivery() >= 0;
+  return (
+    calculateBasketSubtotalValue() - getMinBasketValueForFreeDelivery() >= 0
+  );
 }
 
 export function isVoucherValid(voucherCode) {
@@ -62,18 +67,13 @@ export function isVoucherValid(voucherCode) {
   }
 }
 
-function getVoucher(voucherCode) {
-  return validVouchers.find((e) => e.code === voucherCode);
-}
-
-export function getActiveVoucher(){
+export function getActiveVoucher() {
   let returnValue = "";
   returnValue = settings.activeVoucher;
   return returnValue;
-
 }
 
-export function setActiveVoucher(voucherCode){
+export function setActiveVoucher(voucherCode) {
   settings.activeVoucher = voucherCode;
 }
 
@@ -93,7 +93,8 @@ export function calculateVoucherValue(voucherCode) {
 
   if (voucher) {
     if (voucher["discountUnit"] == "%") {
-      returnvalue = (calculateBasketSubtotalValue() * voucher["discountValue"]) / 100;
+      returnvalue =
+        (calculateBasketSubtotalValue() * voucher["discountValue"]) / 100;
     } else if (voucher["discountUnit"] == "€") {
       returnvalue = voucher["discountValue"];
     }
@@ -106,10 +107,75 @@ export function isBasketEmpty() {
   return basket.length == 0;
 }
 
-export function calculateTotalBasketItems(){
+export function calculateTotalBasketItems() {
   let returnValue = 0;
-basket.forEach((e) => {
-  returnValue += e.ammount;
-})
-return returnValue;
+  basket.forEach((e) => {
+    returnValue += e.ammount;
+  });
+  return returnValue;
+}
+
+export function getBasketProductAmmountById(productId) {
+  let returnAmmount = 0;
+  const product = getProduct(productId);
+  if (product) {
+    const basketProductElement = basket.find((e) => e.productId == product.id);
+    if (basketProductElement) {
+      returnAmmount = basketProductElement.ammount;
+    }
+  }
+
+  return returnAmmount;
+}
+
+export function getBasketEntryById(productId){
+  return basket.find(e => e.productId == productId);
+}
+
+function getBasketEntryIndexById(productId){
+  return basket.findIndex(e => e.productId == productId)
+}
+
+/**
+ *
+ * @param {*} productId
+ * @returns {boolean} sucessfully added to Basket
+ */
+export function requestAddProductToBasketById(productId) {
+  const product = getProduct(productId);
+  if (isProductInStock(productId)) {
+    if (basket.some((e) => e.productId == product.id)) {
+      const entryIndex = basket.findIndex((e) => e.productId == productId);
+      basket[entryIndex].ammount++;
+    } else {
+      basket.push({
+        productId: product.id,
+        ammount: 1,
+        pricePerUnit: product.price,
+      });
+    }
+  }
+}
+
+export function requestDecreaseProductAmmountInBasketById(productId){
+ 
+  if(isProductInStock(productId)){
+    const basketEntry = getBasketEntryById(productId);
+    if(basketEntry){
+      if(basketEntry.ammount == 1)
+      {
+        requestRemoveProductFromBasketById(productId);
+      }
+      else{
+        basketEntry.ammount -= 1;
+      }
+    }
+  }
+}
+
+export function requestRemoveProductFromBasketById(productId) {
+  const basketEntryIndex = getBasketEntryIndexById(productId);
+  if (basketEntryIndex !== -1) {
+    basket.splice(basketEntryIndex, 1);
+  }
 }
