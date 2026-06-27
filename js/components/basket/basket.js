@@ -1,9 +1,20 @@
 import { basket, settings } from "../../app/state.js";
+
 import {
   getProduct,
   getVoucher,
   isProductInStock,
 } from "../../dataconnection/databaseConnection.js";
+
+import {
+  loadVouchersFromLocalStorage,
+  safeUsedVouchersToLocalStorage,
+} from "../../dataconnection/storage.js";
+
+import { updateProductCardFooterById } from "../product/product.ui.js";
+import { updateBasketContent } from "./basket.ui.js";
+
+
 
 function getDeliveryFee() {
   return settings.deliveryFee;
@@ -49,7 +60,7 @@ export function calculateDeliveryFee() {
 }
 
 function isMinBasketValue() {
-  return getCurrentBasketValue - getMinBasketValue() >= 0;
+  return calculateBasketSubtotalValue() - getMinBasketValue() >= 0;
 }
 
 function isDeliveryFree() {
@@ -78,7 +89,7 @@ export function setActiveVoucher(voucherCode) {
 }
 
 function setVoucherAsUsed(voucherCode) {
-  const usedVouchers = loadVouchersFromLocalStorage;
+  const usedVouchers = loadVouchersFromLocalStorage();
 
   if (!usedVouchers.includes(voucherCode)) {
     usedVouchers.push(voucherCode);
@@ -128,19 +139,14 @@ export function getBasketProductAmmountById(productId) {
   return returnAmmount;
 }
 
-export function getBasketEntryById(productId){
-  return basket.find(e => e.productId == productId);
+export function getBasketEntryById(productId) {
+  return basket.find((e) => e.productId == productId);
 }
 
-function getBasketEntryIndexById(productId){
-  return basket.findIndex(e => e.productId == productId)
+function getBasketEntryIndexById(productId) {
+  return basket.findIndex((e) => e.productId == productId);
 }
 
-/**
- *
- * @param {*} productId
- * @returns {boolean} sucessfully added to Basket
- */
 export function requestAddProductToBasketById(productId) {
   const product = getProduct(productId);
   if (isProductInStock(productId)) {
@@ -157,18 +163,24 @@ export function requestAddProductToBasketById(productId) {
   }
 }
 
-export function requestDecreaseProductAmmountInBasketById(productId){
- 
-  if(isProductInStock(productId)){
+export function requestDecreaseProductAmmountInBasketById(productId) {
+  if (isProductInStock(productId)) {
     const basketEntry = getBasketEntryById(productId);
-    if(basketEntry){
-      if(basketEntry.ammount == 1)
-      {
+    if (basketEntry) {
+      if (basketEntry.ammount == 1) {
         requestRemoveProductFromBasketById(productId);
-      }
-      else{
+      } else {
         basketEntry.ammount -= 1;
       }
+    }
+  }
+}
+
+function requestSetProductAmmountInBasketToZeroById(productId) {
+  if (isProductInStock(productId)) {
+    const basketEntry = getBasketEntryById(productId);
+    if (basketEntry) {
+      basketEntry.ammount = 0;
     }
   }
 }
@@ -178,4 +190,22 @@ export function requestRemoveProductFromBasketById(productId) {
   if (basketEntryIndex !== -1) {
     basket.splice(basketEntryIndex, 1);
   }
+}
+
+export function requestOrder() {
+  if (isMinBasketValue()) {
+    setVoucherAsUsed(settings.activeVoucher);
+    requestClearBasket();
+
+    settings.activeVoucher = "";
+  }
+}
+
+export function requestClearBasket() {
+  basket.forEach((e) => {
+    requestSetProductAmmountInBasketToZeroById(e.productId);
+    updateProductCardFooterById(e.productId);
+  });
+  basket.splice(0, basket.length);
+  updateBasketContent();
 }

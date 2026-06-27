@@ -1,19 +1,61 @@
 /* dialog */
 
 /* block */
-.order-dialog{
+.order-placed-dialog{
+
 width: 415px;
+min-width: 415px;
 height:269px;
+min-height: 269px;
 border-radius: 32px;
 padding: 32px 40px;
+gap: 26px;
 }
 
 
 /* element __ */
 
+.order-placed-dialog__header{
+ display: flex;
+ justify-content: flex-end;
+ height: 30px;
+ stroke: var(--color-secondary);
+}
 
+.order-placed-dialog__btn-close{
+      border: none;
+  background-color: unset;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+
+.order-placed-dialog__content{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 16px;
+
+}
+
+.dialog-image{
+
+}
+
+.dialog-textarea{
+display: flex;
+flex-direction: column;
+align-items: center;
+color: var(--color-secondary);
+}
+
+.order-placed-dialog__order-placed-png{
+    width: 80px;
+    height: 57px;
+    
+}
 
 /* modyfier -- */
-.order-dialog--dark{
+.order-placed-dialog--dark{
 background-color: var(--color-dark);
 }

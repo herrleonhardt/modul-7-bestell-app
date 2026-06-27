@@ -1,21 +1,21 @@
-function safeCardToLocalStorrage(card){
+export function safeCardToLocalStorrage(card){
 
     safeDataToLocalStorage(card, "bestellappcard");
 
 }
 
-function loadCardFromLocalStorage(){
+export function loadCardFromLocalStorage(){
     let card = loadDataFromLocalStorage("bestellappcard");
     return card;
 }
 
 
-function safeUsedVouchersToLocalStorage(vouchers){
+export function safeUsedVouchersToLocalStorage(vouchers){
     safeDataToLocalStorage(vouchers, "bestellappvouchers")
 }
 
 
-function loadVouchersFromLocalStorage(){
+export function loadVouchersFromLocalStorage(){
     let vouchers = loadDataFromLocalStorage("bestellappvouchers");
     return vouchers;
 }

@@ -3,6 +3,7 @@ import { addDNone, removeDNone } from "./../../shared/visibility.js"
 import { createHtmlElementWithClass } from "./../../shared/renderUtils.js"
 import { getCalculationTableRow, getVoucherTableRow, getBasketElementHtmlTemplate} from "./basket.ui.template.js";
 import { basket } from "../../app/state.js";
+import { initApp } from "../../app/init.js";
 
 
 
@@ -11,7 +12,7 @@ import { basket } from "../../app/state.js";
 export function toggleBasket() {
   const basket = document.querySelector(".basket");
   
-  if (basket.classList.contains("basket--active")) {
+  if (!basket.classList.contains("d-none")) {
     basket.classList.remove("basket--active");
     setTimeout(() => {
       basket.classList.add("d-none");
@@ -25,6 +26,11 @@ export function toggleBasket() {
   }
 }
 
+export function hideBasketInstandly(){
+  const basket = document.querySelector(".basket");
+  basket.classList.remove("basket--active");
+  basket.classList.add("d-none");
+}
 
 // basket rendering
 export function renderBasketContent() {
@@ -182,6 +188,10 @@ const basketBatch = document.getElementById("menubar-basket-batch");
 }
 
 
-function updateBasketEntryFooter(){
-    
+function updateBasketEntry(basketEntry){
+    const basketEntryContainer = basketEntry;
+    const basketEntryId = basketEntryContainer.dataset.id;
+    const basketEntryHeader = basketEntryContainer.querySelector(".basket-entry__header");
+    const basketEntryFooter = basketEntryContainer.querySelector(".basket-entry__footer");
+  
 }

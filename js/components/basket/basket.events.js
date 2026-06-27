@@ -1,6 +1,7 @@
+import { initApp } from "../../app/init.js";
 import { updateProductCardFooterById } from "../product/product.ui.js";
-import { isVoucherValid, requestAddProductToBasketById, requestDecreaseProductAmmountInBasketById, requestRemoveProductFromBasketById, setActiveVoucher } from "./basket.js";
-import { updateVoucherValue, toggleBasket, updateBasketContent } from "./basket.ui.js";
+import { isVoucherValid, requestAddProductToBasketById, requestClearBasket, requestDecreaseProductAmmountInBasketById, requestOrder, requestRemoveProductFromBasketById, setActiveVoucher } from "./basket.js";
+import { updateVoucherValue, toggleBasket, updateBasketContent, hideBasketInstandly, renderBasketContent } from "./basket.ui.js";
 
 
 export function initBasketEvents() {
@@ -38,7 +39,21 @@ export function initBasketEvents() {
       updateProductCardFooterById(entryId);
       updateBasketContent();
     }
+
+    const orderBtn = e.target.closest("button#order-btn");
+    if(orderBtn){
+
+      requestOrder();
+      hideBasketInstandly();
+      const orderPlacedDialog = document.getElementById("order-placed-dialog");
+      orderPlacedDialog.showModal();
+      setTimeout(() => {orderPlacedDialog.close();},5000);
+    }
+    
+
   });
+
+  
 
   document.addEventListener("focusout", (e) => {
     console.log(e);
