@@ -1,20 +1,8 @@
 import { basket, settings } from "../../app/state.js";
-
-import {
-  getProduct,
-  getVoucher,
-  isProductInStock,
-} from "../../dataconnection/databaseConnection.js";
-
-import {
-  loadVouchersFromLocalStorage,
-  safeUsedVouchersToLocalStorage,
-} from "../../dataconnection/storage.js";
-
+import { getProduct, getVoucher, isProductInStock } from "../../dataconnection/databaseConnection.js";
+import { loadVouchersFromLocalStorage, safeUsedVouchersToLocalStorage } from "../../dataconnection/storage.js";
 import { updateProductCardFooterById } from "../product/product.ui.js";
 import { updateBasketContent } from "./basket.ui.js";
-
-
 
 function getDeliveryFee() {
   return settings.deliveryFee;
@@ -39,15 +27,12 @@ export function calculateBasketSubtotalValue() {
 
 export function calculateBasketTotal() {
   let basketTotalValue = 0;
-
   basketTotalValue = basketTotalValue + calculateBasketSubtotalValue();
   basketTotalValue = basketTotalValue + calculateDeliveryFee();
-
   if (isVoucherValid(settings.activeVoucher)) {
     basketTotalValue =
       basketTotalValue - calculateVoucherValue(settings.activeVoucher);
   }
-
   return basketTotalValue;
 }
 
@@ -90,18 +75,15 @@ export function setActiveVoucher(voucherCode) {
 
 function setVoucherAsUsed(voucherCode) {
   const usedVouchers = loadVouchersFromLocalStorage();
-
   if (!usedVouchers.includes(voucherCode)) {
     usedVouchers.push(voucherCode);
   }
-
   safeUsedVouchersToLocalStorage(usedVouchers);
 }
 
 export function calculateVoucherValue(voucherCode) {
   const voucher = getVoucher(voucherCode);
   let returnvalue = 0;
-
   if (voucher) {
     if (voucher["discountUnit"] == "%") {
       returnvalue =
@@ -110,7 +92,6 @@ export function calculateVoucherValue(voucherCode) {
       returnvalue = voucher["discountValue"];
     }
   }
-
   return returnvalue;
 }
 
@@ -135,7 +116,6 @@ export function getBasketProductAmmountById(productId) {
       returnAmmount = basketProductElement.ammount;
     }
   }
-
   return returnAmmount;
 }
 
@@ -196,7 +176,6 @@ export function requestOrder() {
   if (isMinBasketValue()) {
     setVoucherAsUsed(settings.activeVoucher);
     requestClearBasket();
-
     settings.activeVoucher = "";
   }
 }

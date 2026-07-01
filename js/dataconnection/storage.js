@@ -1,25 +1,20 @@
-export function safeCardToLocalStorrage(card){
-
-    safeDataToLocalStorage(card, "bestellappcard");
-
+export function safeCardToLocalStorrage(card) {
+  safeDataToLocalStorage(card, "bestellappcard");
 }
 
-export function loadCardFromLocalStorage(){
-    let card = loadDataFromLocalStorage("bestellappcard");
-    return card;
+export function loadCardFromLocalStorage() {
+  let card = loadDataFromLocalStorage("bestellappcard");
+  return card;
 }
 
-
-export function safeUsedVouchersToLocalStorage(vouchers){
-    safeDataToLocalStorage(vouchers, "bestellappvouchers")
+export function safeUsedVouchersToLocalStorage(vouchers) {
+  safeDataToLocalStorage(vouchers, "bestellappvouchers");
 }
 
-
-export function loadVouchersFromLocalStorage(){
-    let vouchers = loadDataFromLocalStorage("bestellappvouchers");
-    return vouchers;
+export function loadVouchersFromLocalStorage() {
+  let vouchers = loadDataFromLocalStorage("bestellappvouchers");
+  return vouchers;
 }
-
 
 // genuine functions
 
@@ -28,23 +23,19 @@ function safeDataToLocalStorage(dataArray, storageKey) {
     const jsonData = JSON.stringify(dataArray);
     localStorage.setItem(storageKey, jsonData);
   } catch (error) {
-    console.error("Error saving data to localStorage:", error);
   } finally {
-    console.log("Attempted to save data to localStorage with key:", storageKey);
-  } 
+  }
 }
 
 function loadDataFromLocalStorage(storageKey) {
-    try {
-        const jsonData = localStorage.getItem(storageKey);
-        if (jsonData) {
-            return JSON.parse(jsonData);
-        } else {
-            console.warn("No data found in localStorage for key:", storageKey);
-            return [];
-        }
-    } catch (error) {
-        console.error("Error loading data from localStorage:", error);
-        return [];
+  try {
+    const jsonData = localStorage.getItem(storageKey);
+    if (jsonData) {
+      return JSON.parse(jsonData);
+    } else {
+      return [];
     }
+  } catch (error) {
+    return [];
+  }
 }

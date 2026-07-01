@@ -10,6 +10,6 @@ export function getVoucher(voucherCode) {
   return validVouchers.find((e) => e.code === voucherCode);
 }
 
-export function isProductInStock(productId){
-    return stock.some(e => e.id == productId);
+export function isProductInStock(productId) {
+  return stock.some((e) => e.id == productId);
 }

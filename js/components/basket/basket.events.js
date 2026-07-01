@@ -1,13 +1,12 @@
 import { initApp } from "../../app/init.js";
 import { updateProductCardFooterById } from "../product/product.ui.js";
-import { isVoucherValid, requestAddProductToBasketById, requestClearBasket, requestDecreaseProductAmmountInBasketById, requestOrder, requestRemoveProductFromBasketById, setActiveVoucher } from "./basket.js";
-import { updateVoucherValue, toggleBasket, updateBasketContent, hideBasketInstandly, renderBasketContent } from "./basket.ui.js";
-
+import { isVoucherValid, requestAddProductToBasketById, requestClearBasket, requestDecreaseProductAmmountInBasketById, requestOrder, requestRemoveProductFromBasketById, setActiveVoucher,} from "./basket.js";
+import { updateVoucherValue, toggleBasket, updateBasketContent, hideBasketInstandly, renderBasketContent,} from "./basket.ui.js";
 
 export function initBasketEvents() {
   document.addEventListener("click", (e) => {
     const basketToggleButton = e.target.closest(
-      "div[data-action='toggle-basket']"
+      "div[data-action='toggle-basket']",
     );
     if (basketToggleButton) {
       toggleBasket();
@@ -20,8 +19,10 @@ export function initBasketEvents() {
       requestRemoveProductFromBasketById(entryId);
       updateProductCardFooterById(entryId);
       updateBasketContent();
-    } 
-    const decreaseEntryAmmountButton = e.target.closest("[data-action='decrease-entry']");
+    }
+    const decreaseEntryAmmountButton = e.target.closest(
+      "[data-action='decrease-entry']",
+    );
     if (decreaseEntryAmmountButton) {
       const entry = decreaseEntryAmmountButton.closest("article");
       const entryId = entry.dataset.id;
@@ -29,7 +30,6 @@ export function initBasketEvents() {
       updateProductCardFooterById(entryId);
       updateBasketContent();
     }
-
 
     const addEntryButton = e.target.closest("[data-action='increase-entry']");
     if (addEntryButton) {
@@ -41,22 +41,18 @@ export function initBasketEvents() {
     }
 
     const orderBtn = e.target.closest("button#order-btn");
-    if(orderBtn){
-
+    if (orderBtn) {
       requestOrder();
       hideBasketInstandly();
       const orderPlacedDialog = document.getElementById("order-placed-dialog");
       orderPlacedDialog.showModal();
-      setTimeout(() => {orderPlacedDialog.close();},5000);
+      setTimeout(() => {
+        orderPlacedDialog.close();
+      }, 5000);
     }
-    
-
   });
 
-  
-
   document.addEventListener("focusout", (e) => {
-    console.log(e);
 
     if (e.target.id == "voucher-code") {
       let voucherCode = e.target.value;
@@ -65,6 +61,5 @@ export function initBasketEvents() {
         updateVoucherValue();
       }
     }
-    // isVoucherValid
   });
 }

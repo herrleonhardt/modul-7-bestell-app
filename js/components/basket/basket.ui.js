@@ -1,32 +1,39 @@
-import { calculateBasketSubtotalValue, isBasketEmpty, calculateDeliveryFee, getActiveVoucher, calculateBasketTotal, calculateVoucherValue, calculateTotalBasketItems } from "./basket.js";
-import { addDNone, removeDNone } from "./../../shared/visibility.js"
-import { createHtmlElementWithClass } from "./../../shared/renderUtils.js"
-import { getCalculationTableRow, getVoucherTableRow, getBasketElementHtmlTemplate} from "./basket.ui.template.js";
+import {
+  calculateBasketSubtotalValue,
+  isBasketEmpty,
+  calculateDeliveryFee,
+  getActiveVoucher,
+  calculateBasketTotal,
+  calculateVoucherValue,
+  calculateTotalBasketItems,
+} from "./basket.js";
+import { addDNone, removeDNone } from "./../../shared/visibility.js";
+import { createHtmlElementWithClass } from "./../../shared/renderUtils.js";
+import {
+  getCalculationTableRow,
+  getVoucherTableRow,
+  getBasketElementHtmlTemplate,
+} from "./basket.ui.template.js";
 import { basket } from "../../app/state.js";
 import { initApp } from "../../app/init.js";
 
-
-
-
-
 export function toggleBasket() {
   const basket = document.querySelector(".basket");
-  
+
   if (!basket.classList.contains("d-none")) {
     basket.classList.remove("basket--active");
     setTimeout(() => {
       basket.classList.add("d-none");
-    }, 300); // Warte 300ms, bevor die Klasse "d_none" hinzugefügt wird
+    }, 300); 
   } else {
     basket.classList.remove("d-none");
-  setTimeout(() => {
-    basket.classList.add("basket--active");
-  }, 10); // Warte 10ms, bevor die Klasse "basket--active" hinzugefügt wird
-    
+    setTimeout(() => {
+      basket.classList.add("basket--active");
+    }, 10); 
   }
 }
 
-export function hideBasketInstandly(){
+export function hideBasketInstandly() {
   const basket = document.querySelector(".basket");
   basket.classList.remove("basket--active");
   basket.classList.add("d-none");
@@ -34,48 +41,28 @@ export function hideBasketInstandly(){
 
 // basket rendering
 export function renderBasketContent() {
-  // const basketPlaceholderContainer = document.getElementById("basket__placeholder");
   if (!isBasketEmpty()) {
-
-updateBasketProducts();
-renderBasketCalculation();
+    updateBasketProducts();
+    renderBasketCalculation();
   }
 }
 
 function renderBasketCalculation() {
-  const basketCalculationContainer = document.getElementById(
-    "basket__calculation"
-  );
-
-  const basketMoneyCalculation = createHtmlElementWithClass(
-    "table",
-    "basket-calculation"
-  );
-
+  const basketCalculationContainer = document.getElementById("basket__calculation");
+  const basketMoneyCalculation = createHtmlElementWithClass("table","basket-calculation");
   const subTotalRow = getCalculationTableRow("Subtotal", `subtotal-value`);
   const deliveryFeeRow = getCalculationTableRow("Delivery", `delivery-value`);
-
   const voucherRow = getVoucherTableRow();
   const totalRow = getCalculationTableRow("Total", `total-value`);
-
-  basketMoneyCalculation.append(
-    subTotalRow,
-    deliveryFeeRow,
-    voucherRow,
-    totalRow
-  );
+  basketMoneyCalculation.append(subTotalRow, deliveryFeeRow, voucherRow, totalRow);
   basketCalculationContainer.append(basketMoneyCalculation);
-
   updateBasketCalculation();
 }
 
-function isBasketCalculationRendered(){
-  const basketCalculationContainer = document.getElementById(
-    "basket__calculation"
-  );
+function isBasketCalculationRendered() {
+  const basketCalculationContainer = document.getElementById("basket__calculation");
   return basketCalculationContainer.children.length > 0;
 }
-
 
 // basket update functions
 function updateBasketSubtotal() {
@@ -97,10 +84,10 @@ export function updateVoucherValue() {
   const voucherValue = document.getElementById("voucher-value");
   if (voucherValue) {
     let voucherCode = getActiveVoucher();
-    if(voucherCode != ""){
-    voucherValue.textContent = `-${calculateVoucherValue(voucherCode).toFixed(
-      2
-    )}€`;
+    if (voucherCode != "") {
+      voucherValue.textContent = `-${calculateVoucherValue(voucherCode).toFixed(
+        2,
+      )}€`;
     }
   }
   updateBasketTotal();
@@ -112,18 +99,16 @@ function updateBasketTotal() {
   if (totalValue) {
     totalValue.textContent = `${calculateBasketTotal().toFixed(2)}€`;
   }
-
   if (btnTotalValue) {
     btnTotalValue.textContent = `${calculateBasketTotal().toFixed(2)}€`;
   }
 }
 
 function updateBasketCalculation() {
-  
-  if(!isBasketCalculationRendered()){
+  if (!isBasketCalculationRendered()) {
     renderBasketCalculation();
   }
-  
+
   updateBasketSubtotal();
   updateBasketDeliveryFee();
   updateVoucherValue();
@@ -136,23 +121,21 @@ function updateAfterSubtotal() {
   updateBasketTotal();
 }
 
-export function updateBasketContent(){
+export function updateBasketContent() {
   updateBasketTemplate();
   updateBasketCalculation();
   updateBasketProducts();
   updateBasketIconBatch();
 }
 
-
-function updateBasketTemplate(){
-  if(isBasketEmpty()){
+function updateBasketTemplate() {
+  if (isBasketEmpty()) {
     removeDNone("basket__placeholder");
     addDNone("basket__products");
     addDNone("basket__calculation");
     addDNone("order-btn");
     addDNone("menubar-basket-batch");
-  }
-  else{
+  } else {
     addDNone("basket__placeholder");
     removeDNone("basket__products");
     removeDNone("basket__calculation");
@@ -161,37 +144,28 @@ function updateBasketTemplate(){
   }
 }
 
-function updateBasketProducts(){
-
+function updateBasketProducts() {
   updateBasketTemplate();
-
-    const basketContainer = document.getElementById("basket__products");
-
-    if (basketContainer) {
-      basketContainer.innerHTML = "";
-      for (let bIndex = 0; bIndex < basket.length; bIndex++) {
-        const element = basket[bIndex];
-      
-        const basketElement = getBasketElementHtmlTemplate(element);
-        basketContainer.appendChild(basketElement);
-      }
+  const basketContainer = document.getElementById("basket__products");
+  if (basketContainer) {
+    basketContainer.innerHTML = "";
+    for (let bIndex = 0; bIndex < basket.length; bIndex++) {
+      const element = basket[bIndex];
+      const basketElement = getBasketElementHtmlTemplate(element);
+      basketContainer.appendChild(basketElement);
     }
-
-   updateBasketIconBatch(); 
-
-    
+  }
+  updateBasketIconBatch();
 }
 
-function updateBasketIconBatch(){
-const basketBatch = document.getElementById("menubar-basket-batch");
-    basketBatch.textContent = calculateTotalBasketItems();
+function updateBasketIconBatch() {
+  const basketBatch = document.getElementById("menubar-basket-batch");
+  basketBatch.textContent = calculateTotalBasketItems();
 }
 
-
-function updateBasketEntry(basketEntry){
-    const basketEntryContainer = basketEntry;
-    const basketEntryId = basketEntryContainer.dataset.id;
-    const basketEntryHeader = basketEntryContainer.querySelector(".basket-entry__header");
-    const basketEntryFooter = basketEntryContainer.querySelector(".basket-entry__footer");
-  
+function updateBasketEntry(basketEntry) {
+  const basketEntryContainer = basketEntry;
+  const basketEntryId = basketEntryContainer.dataset.id;
+  const basketEntryHeader = basketEntryContainer.querySelector(".basket-entry__header");
+  const basketEntryFooter = basketEntryContainer.querySelector(".basket-entry__footer");
 }
