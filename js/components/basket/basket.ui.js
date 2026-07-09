@@ -15,29 +15,38 @@ import {
   getBasketElementHtmlTemplate,
 } from "./basket.ui.template.js";
 import { basket } from "../../app/state.js";
-import { initApp } from "../../app/init.js";
 
 export function toggleBasket() {
   const basket = document.querySelector(".basket");
 
-  if (!basket.classList.contains("d-none")) {
-    basket.classList.remove("basket--active");
-    setTimeout(() => {
-      basket.classList.add("d-none");
-    }, 300); 
+  if (!basket.classList.contains("d-none") && !basket.classList.contains("basket--active")) {
+    showBasketWithDelay();
+  }else if (!basket.classList.contains("d-none")){
+    hideBasketWithDelay();
   } else {
-    basket.classList.remove("d-none");
-    setTimeout(() => {
-      basket.classList.add("basket--active");
-    }, 10); 
+    showBasketWithDelay();
   }
 }
 
-export function hideBasketInstandly() {
+export function hideBasketWithDelay(delay = 300) {
   const basket = document.querySelector(".basket");
   basket.classList.remove("basket--active");
-  basket.classList.add("d-none");
+    setTimeout(() => {
+      basket.classList.add("d-none");
+    }, delay); 
+    document.body.style.overflowY = 'unset';
 }
+
+function showBasketWithDelay(delay = 10){
+  const basket = document.querySelector(".basket");
+  basket.classList.remove("d-none");
+    setTimeout(() => {
+      basket.classList.add("basket--active");
+    }, delay); 
+    document.body.style.overflowY = 'hidden';
+}
+
+
 
 // basket rendering
 export function renderBasketContent() {

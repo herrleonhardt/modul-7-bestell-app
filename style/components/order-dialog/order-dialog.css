@@ -14,7 +14,7 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 1085px /*var(--max-mobile-width)*/) {
   .order-placed-dialog {
     width: 100%;
     min-width: unset;

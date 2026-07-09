@@ -3,14 +3,20 @@
     font-weight: bold;
 }
 
-body{
-    overflow-x: hidden;
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0px; /* Breite des vertikalen Balkens */
+  height: 0px; /* Höhe des horizontalen Balkens */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Farbe des Balkens */
+  border-radius: 4px;
 }
 
 .clickable {
     cursor: pointer;
 }
-
 
 /*
 Source - https://stackoverflow.com/a/4407335

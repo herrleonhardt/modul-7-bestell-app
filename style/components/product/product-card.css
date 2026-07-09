@@ -13,10 +13,10 @@
   gap: 15px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .product-card {
-    width: 100%;
-    flex-grow: 1;
+    max-width: unset;
+    /* flex-grow: 1; */
     flex-direction: column;
   }
 }
@@ -39,7 +39,7 @@
   margin-left: auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .product-card__footer {
     flex-direction: row;
     justify-content: space-between;

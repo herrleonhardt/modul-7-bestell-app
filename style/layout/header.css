@@ -12,16 +12,13 @@ header {
   align-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .header__container {
     padding: 16px;
   }
 }
 
-.header__nav {
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .header__nav {
     display: none;
   }

@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .container {
     width: 100%;
   }
@@ -21,7 +21,7 @@
   padding-left: 120px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .subcontainer {
     padding: 16px;
   }

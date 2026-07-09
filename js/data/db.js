@@ -16,7 +16,7 @@ export const stock = [
 export const categories = [
     {"id": 1, "name": "Burger & Sandwiches", "img": "./assets/img/categories/burger.png"},
     {"id": 2, "name": "Pizza (30cm)", "img": "./assets/img/categories/pizza.png"},
-    {"id": 3, "name": "Salad", "img": "./assets/img/categories/salad.png"},{"id": 3, "name": "Salad", "img": "./assets/img/categories/salad.png"}
+    {"id": 3, "name": "Salad", "img": "./assets/img/categories/salad.png"},
 ];
 
 export const validVouchers = [

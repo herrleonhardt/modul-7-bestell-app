@@ -16,8 +16,8 @@ export function increaseProductAmmountInBasket() {}
 export function decreaseProductAmmountInBasket() {}
 
 export function isProductInBasket(productId) {
-  return basket.some((e) => {
-    e.productId == productId;
+  return basket.some((basketEntry) => {
+    basketEntry.productId == productId;
   });
 }
 
@@ -25,7 +25,7 @@ export function getProductBasketAmmount(productId) {
   let returnAmmount = 0;
   const product = getProduct(productId);
   if (product) {
-    const basketProductElement = basket.find((e) => e.productId == product.id);
+    const basketProductElement = basket.find((basketEntry) => basketEntry.productId == product.id);
     if (basketProductElement) {
       returnAmmount = basketProductElement.ammount;
     }

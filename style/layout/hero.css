@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .hero__section {
     gap: 32px;
     padding: 16px;
@@ -22,7 +22,7 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .hero__img {
     aspect-ratio: 1/1;
     height: unset;
@@ -54,7 +54,7 @@
   gap: 16px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
   .restaurant__name-rating {
     flex-direction: column-reverse;
     align-items: center;

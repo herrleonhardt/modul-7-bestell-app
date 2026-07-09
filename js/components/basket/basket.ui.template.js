@@ -54,11 +54,11 @@ function getBasketElementFooterHtmlTemplate(product, basketAmmount = 1) {
   if (basketAmmount == 1) {    
     basketFooterAmmountControl.append(getDeleteEntryButton());
   } else {   
-    basketFooterAmmountControl.append(getDecreaseEntryAmmountButton());
+    basketFooterAmmountControl.append(getChangeEntryAmmountButton(Changetype.DECREASE));
   }
   const entryAmmount = createHtmlElementWithClass("span", "noselect");
   entryAmmount.textContent = product.ammount;
-  basketFooterAmmountControl.append(entryAmmount, getIncreaseEntryAmmountButton());
+  basketFooterAmmountControl.append(entryAmmount, getChangeEntryAmmountButton(Changetype.INCREASE));
   const basketFooterPrice = createHtmlElementWithClass("span", "basket-entry__footer-price noselect");
   basketFooterPrice.textContent = `${product.pricePerUnit.toFixed(2)}€`;
   basketFooterContainer.append(basketFooterAmmountControl, basketFooterPrice);
@@ -72,19 +72,24 @@ function getDeleteEntryButton(){
     return deleteEntryButton;
 }
 
-function getDecreaseEntryAmmountButton(){
-   const decreaseEntryAmmountButton = createHtmlElementWithClass("span", "clickable noselect");
-    decreaseEntryAmmountButton.textContent = "-";
-    decreaseEntryAmmountButton.dataset.action = "decrease-entry";
-    return decreaseEntryAmmountButton;
+const Changetype = {
+  INCREASE: "increase",
+  DECREASE: "decrease"
 }
 
-function getIncreaseEntryAmmountButton(){
-  const increaseEntryAmmountButton = createHtmlElementWithClass("span", "clickable noselect");
-  increaseEntryAmmountButton.textContent = "+";
-  increaseEntryAmmountButton.dataset.action = "increase-entry";
-  return increaseEntryAmmountButton;
+function getChangeEntryAmmountButton(changetype){
+   const changeEntryAmmountButton = createHtmlElementWithClass("span", "clickable noselect");
+   if(changetype == Changetype.DECREASE){
+    changeEntryAmmountButton.textContent = "-";
+    changeEntryAmmountButton.dataset.action = "decrease-entry";
+   }
+   else{
+    changeEntryAmmountButton.textContent = "+";
+    changeEntryAmmountButton.dataset.action = "increase-entry";
+   }
+    return changeEntryAmmountButton;
 }
+
 
 function getDeleteIconSvg() {
   return createSvg(

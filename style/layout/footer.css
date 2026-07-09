@@ -22,7 +22,7 @@ footer {
     color: var(--color-text-light);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1085px /*var(--max-mobile-width)*/) {
 .footer-nav {
       flex-direction: column;
       gap: unset;

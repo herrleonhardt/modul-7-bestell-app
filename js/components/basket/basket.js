@@ -101,8 +101,8 @@ export function isBasketEmpty() {
 
 export function calculateTotalBasketItems() {
   let returnValue = 0;
-  basket.forEach((e) => {
-    returnValue += e.ammount;
+  basket.forEach((basketEntry) => {
+    returnValue += basketEntry.ammount;
   });
   return returnValue;
 }
@@ -111,7 +111,7 @@ export function getBasketProductAmmountById(productId) {
   let returnAmmount = 0;
   const product = getProduct(productId);
   if (product) {
-    const basketProductElement = basket.find((e) => e.productId == product.id);
+    const basketProductElement = basket.find((basketEntry) => basketEntry.productId == product.id);
     if (basketProductElement) {
       returnAmmount = basketProductElement.ammount;
     }
@@ -120,18 +120,18 @@ export function getBasketProductAmmountById(productId) {
 }
 
 export function getBasketEntryById(productId) {
-  return basket.find((e) => e.productId == productId);
+  return basket.find((basketEntry) => basketEntry.productId == productId);
 }
 
 function getBasketEntryIndexById(productId) {
-  return basket.findIndex((e) => e.productId == productId);
+  return basket.findIndex((basketEntry) => basketEntry.productId == productId);
 }
 
 export function requestAddProductToBasketById(productId) {
   const product = getProduct(productId);
   if (isProductInStock(productId)) {
-    if (basket.some((e) => e.productId == product.id)) {
-      const entryIndex = basket.findIndex((e) => e.productId == productId);
+    if (basket.some((basketEntry) => basketEntry.productId == product.id)) {
+      const entryIndex = basket.findIndex((basketEntry) => basketEntry.productId == productId);
       basket[entryIndex].ammount++;
     } else {
       basket.push({

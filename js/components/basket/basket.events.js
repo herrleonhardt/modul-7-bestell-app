@@ -1,7 +1,7 @@
-import { initApp } from "../../app/init.js";
+
 import { updateProductCardFooterById } from "../product/product.ui.js";
 import { isVoucherValid, requestAddProductToBasketById, requestClearBasket, requestDecreaseProductAmmountInBasketById, requestOrder, requestRemoveProductFromBasketById, setActiveVoucher} from "./basket.js";
-import { updateVoucherValue, toggleBasket, updateBasketContent, hideBasketInstandly, renderBasketContent} from "./basket.ui.js";
+import { updateVoucherValue, toggleBasket, updateBasketContent, renderBasketContent, hideBasketWithDelay} from "./basket.ui.js";
 
 export function initBasketEvents() {
   initToggleBasketEvent();
@@ -69,7 +69,7 @@ function initOrderButtonEvent() {
     const orderBtn = e.target.closest("button#order-btn");
     if (orderBtn) {
       requestOrder();
-      hideBasketInstandly();
+      hideBasketWithDelay(0);
       const orderPlacedDialog = document.getElementById("order-placed-dialog");
       orderPlacedDialog.showModal();
       setTimeout(() => {

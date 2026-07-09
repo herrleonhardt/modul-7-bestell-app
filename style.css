@@ -1,0 +1,20 @@
+@import url('./style/base/standard.css');
+@import url('./style/base/fonts.css');
+@import url('./style/base/variables.css');
+@import url('./style/base/base.css');
+
+@import url('./style/layout/container.css');
+@import url('./style/layout/header.css');
+@import url('./style/layout/footer.css');
+@import url('./style/layout/hero.css');
+@import url('./style/layout/main-content.css');
+
+@import url('./style/shared/button.css');
+@import url('./style/utils/visibility.css');
+
+@import url('./style/components/basket/basket.css');
+@import url('./style/components/categorie/categorie.css');
+@import url('./style/components/menubar/menubar.css');
+@import url('./style/components/order-dialog/order-dialog.css');
+@import url('./style/components/product/product-card.css');
+

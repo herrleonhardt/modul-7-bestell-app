@@ -2,14 +2,14 @@ import { stock, validVouchers } from "../data/db.js";
 
 export function getProduct(productId) {
   let product = undefined;
-  product = stock.find((e) => e.id == productId);
+  product = stock.find((stockProduct) => stockProduct.id == productId);
   return product;
 }
 
 export function getVoucher(voucherCode) {
-  return validVouchers.find((e) => e.code === voucherCode);
+  return validVouchers.find((voucher) => voucher.code === voucherCode);
 }
 
 export function isProductInStock(productId) {
-  return stock.some((e) => e.id == productId);
+  return stock.some((stockProduct) => stockProduct.id == productId);
 }
