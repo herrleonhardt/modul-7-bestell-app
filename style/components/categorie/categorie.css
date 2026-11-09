@@ -33,7 +33,7 @@
 
 .categorie__headerBg{
     position: absolute;
-    left: min(0px, calc((1440px - 100vw + 15px) / 2));
+    left: min(0px, calc((1440px - 100vw) / 2));
     z-index: 0  ;
     background-color: var(--color-primary);
     width: 100vw;
